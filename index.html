@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planify – Dola AI-inspired Productivity App</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar">
+      <ul>
+        <li><button class="sidebar-btn" title="Profile">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h0a4 4 0 0 1 4 4v2"/></svg>
+          <span>Profile</span>
+        </button></li>
+        <li><button class="sidebar-btn" title="Settings">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 9 3.09V3a2 2 0 1 1 4 0v.09c0 .66.26 1.3.73 1.77.47.47 1.11.73 1.77.73h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09c0 .66.26 1.3.73 1.77.47.47 1.11.73 1.77.73h.09a2 2 0 1 1 0 4h-.09c-.66 0-1.3.26-1.77.73z"/></svg>
+          <span>Settings</span>
+        </button></li>
+      </ul>
+    </nav>
+    <div class="sidebar-divider"></div>
+
+    <div class="todo-section">
+      <h2>To-Do List</h2>
+      <form id="taskForm" class="todo-form">
+  <input type="text" id="taskInput" placeholder="Enter task" required />
+  <button type="button" id="datePickerBtn" aria-label="Pick a date" tabindex="0">
+  <span id="datePickerIcon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2979ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="4"/>
+      <line x1="16" y1="2" x2="16" y2="6"/>
+      <line x1="8" y1="2" x2="8" y2="6"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+  </span>
+  <span id="datePickerLabel"></span>
+</button>
+  <input type="date" id="taskDate" style="display:none;" />
+  <button type="submit" aria-label="Add Task" tabindex="0">+</button>
+</form>
+      <ul id="todoList"></ul>
+    </div>
+    <div class="calendar-section">
+  <div class="calendar-header">
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+      <div>
+        <span id="calendarMonthYear">April 2025</span>
+        <div class="calendar-nav">
+          <button id="calendarPrev" class="prev-btn">Prev</button>
+          <button id="calendarToday" class="today-btn">Today</button>
+          <button id="calendarNext" class="next-btn">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="calendarGrid" class="calendar-grid"></div>
+</div>
+
+  </div>
+  <button id="chatButton" class="chat-btn" aria-label="Open chat">
+  <span class="visually-hidden">Chat</span>
+  <svg class="chat-animated-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+    <ellipse cx="20" cy="20" rx="18" ry="18" fill="#007bff"/>
+    <path d="M12 22V16C12 14.8954 12.8954 14 14 14H26C27.1046 14 28 14.8954 28 16V22C28 23.1046 27.1046 24 26 24H16L12 28V22Z" fill="white"/>
+    <circle class="chat-dot" cx="17" cy="20" r="1.5" fill="#007bff"/>
+    <circle class="chat-dot" cx="20" cy="20" r="1.5" fill="#007bff"/>
+    <circle class="chat-dot" cx="23" cy="20" r="1.5" fill="#007bff"/>
+  </svg>
+</button>
+  <div id="chatModal" class="chat-modal">
+    <div class="chat-modal-content">
+      <span class="chat-close" id="closeChat">&times;</span>
+<button class="chat-clear-btn" id="clearChatHistory" title="Clear chat history">🗑️</button>
+      <div id="chatMessages" class="chat-messages"></div>
+      <form id="chatForm" class="chat-form">
+        <input type="text" id="chatInput" placeholder="Type your message..." autocomplete="off" required />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

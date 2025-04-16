@@ -1,0 +1,617 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('chat.css');
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f7f8fa;
+  color: #222;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.sidebar* {
+  box-sizing: border-box;
+}
+
+.sidebar {
+  position: relative;
+  width: 5%;
+  min-width: 60px;
+  max-width: 100px;
+  height: 100%;
+  background: #f4f6fa;
+  border-right: 2px solid #f1f1f1;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+  padding-top: 32px;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  height: 100%;
+}
+
+.sidebar-btn {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #444;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 8px 0;
+  width: 100%;
+  transition: color 0.18s, background 0.18s;
+}
+
+.sidebar-btn:hover, .sidebar-btn:focus {
+  color: #007bff;
+  background: #f1f7ff;
+}
+
+.sidebar-btn svg {
+  margin-bottom: 2px;
+}
+
+.sidebar-btn span {
+  font-size: 0.92em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 56px;
+    padding-top: 18px;
+  }
+  .sidebar-btn span {
+    display: none;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  height: 100vh;
+  min-height: 600px;
+  width: calc(100vw - 70px);
+  margin-left: 70px;
+  gap: 0;
+  padding: 0;
+  background: #f7f8fa;
+  overflow: hidden;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px;
+  min-width: 70px;
+  max-width: 70px;
+  height: 100%;
+  background: #f4f6fa;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 18px;
+  flex-shrink: 0;
+  gap: 1.5rem;
+  margin: 0;
+  z-index: 10;
+}
+
+.sidebar-divider {
+  width: 1px;
+  height: 100%;
+  flex-shrink: 0;
+  border-right: 1px solid #e3e7ee;
+  background: none;
+}
+
+.todo-section {
+  margin-left: 82px;
+}
+
+.todo-section {
+  width: 25vw;
+  min-width: 300px;
+  max-width: 400px;
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.5rem 1.2rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 1;
+  border-right: 1px solid #e3e7ee;
+}
+
+.container > .sidebar-divider {
+  margin-left: 0;
+}
+
+.todo-section h2 {
+  margin-bottom: 1.2rem;
+}
+
+/* Todo form styles - consolidated to avoid conflicts */
+.todo-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.calendar-header {
+  flex-shrink: 0;
+  text-align: left;
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.calendar-nav button {
+  background: white;
+  color: #000;
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.calendar-nav button:hover {
+  background-color: #f5f5f5;
+  border-color: #d1d1d1;
+}
+
+.calendar-nav .prev-btn::before {
+  content: '←';
+  display: inline-block;
+}
+
+.calendar-nav .next-btn::after {
+  content: '→';
+  display: inline-block;
+}
+
+/* Text input styles */
+.todo-form input[type="text"] {
+  height: 40px !important;
+  padding: 0 12px !important;
+  font-size: 1rem;
+  border: 1px solid #e3e7ee !important;
+  border-radius: 8px !important;
+  outline: none;
+  flex: 1 1 auto;
+  background: #fafbfc;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+/* Hidden date input */
+#taskDate {
+  display: none;
+}
+
+/* Common button styles */
+.todo-form button {
+  height: 40px !important;
+  width: 40px !important;
+  min-height: 40px !important;
+  min-width: 40px !important;
+  max-height: 40px !important;
+  max-width: 40px !important;
+  background: #222 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 1.2rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex: none !important;
+}
+
+/* Specific styles for date picker button */
+#datePickerBtn {
+  font-size: 1.2rem;
+}
+
+/* SVG icon styles */
+#datePickerBtn svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  stroke: white;
+}
+
+/* Focus and hover states */
+.todo-form button:focus {
+  outline: 2px solid #333;
+}
+
+.todo-form button:hover {
+  background: #444 !important;
+}
+
+/* Plus button specific */
+.todo-form button[type="submit"] {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.todo-form input[type="text"] {
+  height: 44px;
+  padding: 0 16px;
+  font-size: 1rem;
+  border: 1px solid #e3e7ee;
+  border-radius: 12px;
+  outline: none;
+  flex: 1 1 auto;
+  min-width: 0;
+  background: #fafbfc;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  transition: border 0.2s;
+}
+
+.todo-form input[type="text"]:focus {
+  border: 1.5px solid #2979ff;
+}
+
+#datePickerBtn {
+  height: 44px;
+  width: 44px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1.5px 5px rgba(0,0,0,0.06);
+  transition: background 0.2s;
+  margin-right: 2px;
+  padding: 0;
+}
+#datePickerBtn svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  stroke: #fff;
+}
+#datePickerBtn:focus {
+  outline: 2px solid #222;
+}
+#datePickerBtn:hover {
+  background: #222;
+}
+
+.todo-form button[type="submit"] {
+  height: 44px;
+  width: 44px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s;
+  margin-left: 2px;
+  padding: 0;
+}
+.todo-form button[type="submit"]:hover {
+  background: #222;
+}
+
+#taskDate {
+  display: none;
+}
+
+.todo-form input[type="text"],
+.todo-form input[type="date"] {
+  height: 44px;
+  padding: 0 14px;
+  font-size: 1rem;
+  border: 1px solid #e3e7ee;
+  border-radius: 8px;
+  outline: none;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.todo-form input[type="date"] {
+  width: 140px;
+  flex: 0 0 140px;
+}
+
+.todo-form button {
+  height: 44px;
+  padding: 0 18px;
+  font-size: 1rem;
+  background: #2979ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.todo-form button:hover {
+  background: #155cb0;
+}
+
+.calendar-section {
+  flex: 1 1 0%;
+  width: 100%;
+  min-width: 400px;
+  max-width: none;
+  background: #fff;
+  border-radius: 0 18px 18px 0;
+  border-left: 1px solid #e3e7ee;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin: 0 0 0 auto;
+  height: 100vh;
+  min-height: 600px;
+}
+
+.calendar-header {
+  width: 100%;
+  margin: 0;
+  padding: 1.2rem 0 0.2rem 0;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid #e3e7ee;
+}
+
+#calendarGrid, .calendar-grid {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 100px;
+  gap: 12px;
+  min-height: 600px;
+  border-radius: 0;
+  align-items: stretch;
+  justify-items: stretch;
+  background: none;
+}
+
+.calendar-header-cell {
+  font-weight: bold;
+  background: #fff;
+  color: #222;
+  text-align: left;
+  border-bottom: none;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.08em;
+  letter-spacing: 0.02em;
+  border-radius: 0;
+  margin-bottom: 2px;
+  border: none;
+  box-shadow: none;
+  padding-left: 8px;
+}
+
+.calendar-day {
+  background: #fff;
+  border-radius: 8px;
+  min-height: 100px;
+  max-height: 120px;
+  height: 100px;
+  padding: 0.5rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+  position: relative;
+  transition: box-shadow 0.15s, background 0.15s;
+  box-sizing: border-box;
+  border: 1.5px solid #e3e7ee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.calendar-day:not(.outside):hover {
+  box-shadow: 0 2px 8px rgba(41,121,255,0.08);
+  background: #f4f8ff;
+  cursor: pointer;
+  border: 2px solid #b6d6ff;
+}
+
+.calendar-day.outside {
+  background: #fff;
+  border: 2px dashed #f3f3f3;
+  opacity: 0.4;
+  box-shadow: none;
+}
+
+.calendar-today {
+  border: 2.5px solid #2979ff !important;
+  background: #eaf3ff !important;
+  color: #222 !important;
+  box-shadow: 0 0 0 2px #b6d6ff;
+  z-index: 2;
+}
+
+.today-btn {
+  background: #2979ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.today-btn:hover {
+  background: #155cb0;
+}
+
+.calendar-view-toggle {
+  display: flex;
+  align-items: center;
+  background: #f3f3f3;
+  border-radius: 2em;
+  padding: 4px 6px;
+  gap: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.calendar-view-toggle .view-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.93em;
+  font-weight: 500;
+  color: #111;
+  transition: background 0.16s, color 0.16s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  min-height: 28px;
+}
+
+.calendar-view-toggle .view-btn svg {
+  margin-right: 3px;
+  min-width: 16px;
+  min-height: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.calendar-view-toggle .view-btn.active {
+  background: #fff;
+  color: #222;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  border: 1.5px solid #ddd;
+}
+.calendar-view-toggle .view-btn:focus {
+  border: 1.5px solid #2979ff;
+}
+
+.calendar-day .date-label {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.3rem;
+  font-size: 1.07em;
+}
+.calendar-day .calendar-task {
+  background: #222;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.93em;
+  margin-bottom: 0.2rem;
+  margin-top: 0.1rem;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 0.5rem;
+  }
+  .todo-section, .calendar-section {
+    min-width: unset;
+    padding: 1.2rem 0.7rem;
+  }
+  #calendarGrid, .calendar-grid {
+    margin: 10px 2px 0 2px;
+    gap: 6px;
+    min-height: 360px;
+    grid-auto-rows: 48px;
+  }
+  .calendar-day {
+    min-height: 40px;
+    height: 40px;
+    font-size: 0.93em;
+  }
+  .calendar-header-cell {
+    min-height: 28px;
+    font-size: 0.98em;
+  }
+} 
